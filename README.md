@@ -1,5 +1,5 @@
 # Notepad-WinFormsApp
-Notepad in c# .net
+c# WindowsForms .NET Framework
 
 # Features
 
