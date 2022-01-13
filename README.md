@@ -1,4 +1,4 @@
-# Notepad-WinFormsApp
+# Windows 10 like notepad but in DarkMode!
 c# WindowsForms .NET Framework
 
 # Features
