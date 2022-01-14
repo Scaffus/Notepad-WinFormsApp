@@ -1,7 +1,8 @@
 # Windows 10 like notepad but in DarkMode!
 c# WindowsForms .NET Framework
 
-![image](https://user-images.githubusercontent.com/77048269/149551590-6950f8fa-4d3c-42cd-ac93-120bcc60607f.png)
+![image](https://user-images.githubusercontent.com/77048269/149556383-e66b7ca4-3c58-49da-a102-a1e018d79fe6.png)
+
 
 # Features
 
