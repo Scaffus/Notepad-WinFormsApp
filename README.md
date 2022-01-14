@@ -13,4 +13,5 @@ c# WindowsForms .NET Framework
 - Word count info
 - Zoom percentage info
 - App title is file name
-- Close, new and open safety (popup message)
+- Close, new and open safety (save popup message)
+- Save indicator in app title
