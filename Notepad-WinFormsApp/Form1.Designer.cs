@@ -50,6 +50,8 @@ namespace Notepad_WinFormsApp
             this.displayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fullscreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rtxtbContent = new System.Windows.Forms.RichTextBox();
             this.ofdialOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.sfdialSaveFile = new System.Windows.Forms.SaveFileDialog();
@@ -61,8 +63,8 @@ namespace Notepad_WinFormsApp
             this.lablZoom = new System.Windows.Forms.Label();
             this.lablWords = new System.Windows.Forms.Label();
             this.lablColumnLigns = new System.Windows.Forms.Label();
-            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.panlTabLeft = new System.Windows.Forms.Panel();
+            this.panlTabTop = new System.Windows.Forms.Panel();
             this.msMenu.SuspendLayout();
             this.panlInfos.SuspendLayout();
             this.SuspendLayout();
@@ -94,7 +96,6 @@ namespace Notepad_WinFormsApp
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 25);
             this.fileToolStripMenuItem.Text = "File";
-            this.fileToolStripMenuItem.MouseHover += new System.EventHandler(this.msMenuItem_Hover);
             // 
             // newToolStripMenuItem
             // 
@@ -142,7 +143,6 @@ namespace Notepad_WinFormsApp
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(48, 25);
             this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.MouseHover += new System.EventHandler(this.msMenuItem_Hover);
             // 
             // undoToolStripMenuItem
             // 
@@ -211,7 +211,6 @@ namespace Notepad_WinFormsApp
             this.formatToolStripMenuItem.Name = "formatToolStripMenuItem";
             this.formatToolStripMenuItem.Size = new System.Drawing.Size(72, 25);
             this.formatToolStripMenuItem.Text = "Format";
-            this.formatToolStripMenuItem.MouseHover += new System.EventHandler(this.msMenuItem_Hover);
             // 
             // fontToolStripMenuItem
             // 
@@ -258,16 +257,30 @@ namespace Notepad_WinFormsApp
             this.windowedToolStripMenuItem.Text = "Windowed";
             this.windowedToolStripMenuItem.Click += new System.EventHandler(this.windowedToolStripMenuItem_Click);
             // 
+            // zoomToolStripMenuItem
+            // 
+            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.zoomToolStripMenuItem.Text = "Zoom -";
+            this.zoomToolStripMenuItem.Click += new System.EventHandler(this.zoomToolStripMenuItem_Click);
+            // 
+            // zoomToolStripMenuItem1
+            // 
+            this.zoomToolStripMenuItem1.Name = "zoomToolStripMenuItem1";
+            this.zoomToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
+            this.zoomToolStripMenuItem1.Text = "Zoom +";
+            this.zoomToolStripMenuItem1.Click += new System.EventHandler(this.zoomToolStripMenuItem1_Click);
+            // 
             // rtxtbContent
             // 
             this.rtxtbContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.rtxtbContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtxtbContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtbContent.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtxtbContent.Font = new System.Drawing.Font("Lucida Sans Unicode", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxtbContent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.rtxtbContent.Location = new System.Drawing.Point(0, 29);
+            this.rtxtbContent.Location = new System.Drawing.Point(5, 34);
             this.rtxtbContent.Name = "rtxtbContent";
-            this.rtxtbContent.Size = new System.Drawing.Size(800, 402);
+            this.rtxtbContent.Size = new System.Drawing.Size(795, 392);
             this.rtxtbContent.TabIndex = 1;
             this.rtxtbContent.Text = "";
             this.rtxtbContent.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtxtbContent_LinkClicked);
@@ -315,17 +328,17 @@ namespace Notepad_WinFormsApp
             this.panlInfos.Controls.Add(this.lablWords);
             this.panlInfos.Controls.Add(this.lablColumnLigns);
             this.panlInfos.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panlInfos.Location = new System.Drawing.Point(0, 431);
+            this.panlInfos.Location = new System.Drawing.Point(0, 426);
             this.panlInfos.Name = "panlInfos";
-            this.panlInfos.Size = new System.Drawing.Size(800, 19);
+            this.panlInfos.Size = new System.Drawing.Size(800, 24);
             this.panlInfos.TabIndex = 3;
             // 
             // lablZoom
             // 
+            this.lablZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lablZoom.AutoSize = true;
-            this.lablZoom.Dock = System.Windows.Forms.DockStyle.Right;
             this.lablZoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablZoom.Location = new System.Drawing.Point(659, 0);
+            this.lablZoom.Location = new System.Drawing.Point(656, 3);
             this.lablZoom.Name = "lablZoom";
             this.lablZoom.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.lablZoom.Size = new System.Drawing.Size(89, 15);
@@ -334,10 +347,10 @@ namespace Notepad_WinFormsApp
             // 
             // lablWords
             // 
+            this.lablWords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lablWords.AutoSize = true;
-            this.lablWords.Dock = System.Windows.Forms.DockStyle.Right;
             this.lablWords.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablWords.Location = new System.Drawing.Point(748, 0);
+            this.lablWords.Location = new System.Drawing.Point(745, 3);
             this.lablWords.Name = "lablWords";
             this.lablWords.Size = new System.Drawing.Size(52, 15);
             this.lablWords.TabIndex = 1;
@@ -345,28 +358,31 @@ namespace Notepad_WinFormsApp
             // 
             // lablColumnLigns
             // 
+            this.lablColumnLigns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lablColumnLigns.AutoSize = true;
-            this.lablColumnLigns.Dock = System.Windows.Forms.DockStyle.Left;
             this.lablColumnLigns.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablColumnLigns.Location = new System.Drawing.Point(0, 0);
+            this.lablColumnLigns.Location = new System.Drawing.Point(1, 3);
             this.lablColumnLigns.Name = "lablColumnLigns";
             this.lablColumnLigns.Size = new System.Drawing.Size(65, 15);
             this.lablColumnLigns.TabIndex = 0;
             this.lablColumnLigns.Text = "Col 1, Ln 1";
             // 
-            // zoomToolStripMenuItem
+            // panlTabLeft
             // 
-            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.zoomToolStripMenuItem.Text = "Zoom -";
-            this.zoomToolStripMenuItem.Click += new System.EventHandler(this.zoomToolStripMenuItem_Click);
+            this.panlTabLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.panlTabLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panlTabLeft.Location = new System.Drawing.Point(0, 29);
+            this.panlTabLeft.Name = "panlTabLeft";
+            this.panlTabLeft.Size = new System.Drawing.Size(5, 397);
+            this.panlTabLeft.TabIndex = 4;
             // 
-            // zoomToolStripMenuItem1
+            // panlTabTop
             // 
-            this.zoomToolStripMenuItem1.Name = "zoomToolStripMenuItem1";
-            this.zoomToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
-            this.zoomToolStripMenuItem1.Text = "Zoom +";
-            this.zoomToolStripMenuItem1.Click += new System.EventHandler(this.zoomToolStripMenuItem1_Click);
+            this.panlTabTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panlTabTop.Location = new System.Drawing.Point(5, 29);
+            this.panlTabTop.Name = "panlTabTop";
+            this.panlTabTop.Size = new System.Drawing.Size(795, 5);
+            this.panlTabTop.TabIndex = 5;
             // 
             // NotesForm
             // 
@@ -375,6 +391,8 @@ namespace Notepad_WinFormsApp
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.rtxtbContent);
+            this.Controls.Add(this.panlTabTop);
+            this.Controls.Add(this.panlTabLeft);
             this.Controls.Add(this.panlInfos);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.msMenu);
@@ -384,6 +402,7 @@ namespace Notepad_WinFormsApp
             this.MainMenuStrip = this.msMenu;
             this.Name = "NotesForm";
             this.Text = "Notes";
+            this.Load += new System.EventHandler(this.NotesForm_Load);
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
             this.panlInfos.ResumeLayout(false);
@@ -428,6 +447,8 @@ namespace Notepad_WinFormsApp
         private System.Windows.Forms.Label lablZoom;
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem1;
+        private System.Windows.Forms.Panel panlTabLeft;
+        private System.Windows.Forms.Panel panlTabTop;
     }
 }
 

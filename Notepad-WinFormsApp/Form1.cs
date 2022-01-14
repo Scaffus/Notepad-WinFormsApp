@@ -14,6 +14,12 @@ namespace Notepad_WinFormsApp
         string fileFilter = "Text File|*.txt|All files |*.* a";
         string defaultExt = ".txt";
         string app_name = " - Notes";
+
+        // Used to know wether or not the user has saved his file
+        // so it doesn't show the save dialog everytime the user saves.
+        string saveFile_Name;
+        bool fileModified = false;
+
         public NotesForm()
         {
             InitializeComponent();
@@ -48,17 +54,20 @@ namespace Notepad_WinFormsApp
             // If richTextBox isn't empty,
             // 0 → save current note and open another one
             // 1 → open a note and sets the app title to the file name
-            if (!isTextBoxEmpty(rtxtbContent))
+            if (fileModified)
             {
-                if (confirmMessageBox() == 0)
+                int confirmResult = confirmMessageBox();
+                if (confirmResult == 0)
                 {
                     saveFile();
                     openFile();
-                } else if (confirmMessageBox() == 1)
+                }
+                else if (confirmResult == 1)
                 {
                     openFile();
                 }
-            } else
+            }
+            else
             {
                 openFile();
             }
@@ -102,27 +111,45 @@ namespace Notepad_WinFormsApp
         private void openFile()
         {
             // Defines default extension and filter for the openFileDialog
+            ofdialOpenFile.FileName = "note.txt";
             ofdialOpenFile.DefaultExt = defaultExt;
             ofdialOpenFile.Filter = fileFilter;
             if (ofdialOpenFile.ShowDialog() == DialogResult.OK)
             {
                 // Sets richTextBox content to the file content and change the app title to the file name
-                rtxtbContent.Text = File.ReadAllText(ofdialOpenFile.FileName);
-                this.Text = ofdialOpenFile.FileName + app_name;
+                string ofdialOpenFile_Name = ofdialOpenFile.FileName;
+                rtxtbContent.Text = File.ReadAllText(ofdialOpenFile_Name);
+                this.Text = Path.GetFileNameWithoutExtension(ofdialOpenFile_Name) + app_name;
+                saveFile_Name = ofdialOpenFile_Name;
+                fileModified = true;
             }
         }
 
         private void saveFile()
         {
             // Defines default extension and filter for the saveFileDialog
+            sfdialSaveFile.FileName = "note.txt";
             sfdialSaveFile.DefaultExt = defaultExt;
             sfdialSaveFile.Filter = fileFilter;
-            if (sfdialSaveFile.ShowDialog() == DialogResult.OK)
+            if (!isTextBoxEmpty(rtxtbContent))
             {
-                //  Writes the richTextBox content to the file and change the app title to the file name
-                File.WriteAllText(sfdialSaveFile.FileName, rtxtbContent.Text);
-                this.Text = sfdialSaveFile.FileName + app_name;
+                if (fileModified & saveFile_Name != null)
+                {
+                    File.WriteAllText(saveFile_Name, rtxtbContent.Text);
+                    this.Text = Path.GetFileNameWithoutExtension(saveFile_Name) + app_name;
+                }
+                else
+                {
+                    if (sfdialSaveFile.ShowDialog() == DialogResult.OK)
+                    {
+                        //  Writes the richTextBox content to the file and change the app title to the file name
+                        saveFile_Name = sfdialSaveFile.FileName;
+                        File.WriteAllText(saveFile_Name, rtxtbContent.Text);
+                        this.Text = Path.GetFileNameWithoutExtension(saveFile_Name) + app_name;
+                    }
+                }
             }
+            fileModified = false;
         }
 
         private void closeApp()
@@ -229,10 +256,10 @@ namespace Notepad_WinFormsApp
             closeApp();
         }
 
-        private void msMenuItem_Hover(object sender, EventArgs e)
+        /*private void msMenuItem_Hover(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem) sender;
-        }
+        }*/
 
         private void rtxtbContent_TextChanged(object sender, EventArgs e)
         {
@@ -243,6 +270,15 @@ namespace Notepad_WinFormsApp
             // Displays the current word count
             int words = GetWordCount(rtxtbContent);
             lablWords.Text = $"Words {words}";
+
+            // Indicator of wether or not the file is saved
+            // * → not saved
+            // nothing → saved
+            fileModified = true;
+            if (!(this.Text.Contains("*")))
+            {
+                this.Text = "*" + this.Text;
+            }
         }
 
         private void rtxtbContent_ClientSizeChanged(object sender, EventArgs e)
@@ -342,8 +378,13 @@ namespace Notepad_WinFormsApp
         private void zoomToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // current zoom + 10 percent 
-            rtxtbContent.ZoomFactor += (float) 0.1;
+            rtxtbContent.ZoomFactor += (float)0.1;
             updateZoomFactorLabel();
+        }
+
+        private void NotesForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
