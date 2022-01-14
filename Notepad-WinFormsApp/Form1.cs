@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -15,6 +16,10 @@ namespace Notepad_WinFormsApp
         string defaultExt = ".txt";
         string app_name = " - Notes";
 
+        FontStyle font;
+        Font fontStyle;
+        Color defaultColor = Color.FromArgb(204, 204, 204);
+
         // Used to know wether or not the user has saved his file
         // so it doesn't show the save dialog everytime the user saves.
         string saveFile_Name;
@@ -27,6 +32,15 @@ namespace Notepad_WinFormsApp
             this.Text = "Unnamed" + app_name;
             btnClose.Visible = false;
             /*msMenu.Renderer = new HoverRenderer();*/
+            lablEncoding.Text = "UTF-8";
+
+            // Setting up font styles
+            rtxtbContent.ForeColor = defaultColor;
+            btnFontColor.BackColor = defaultColor;
+            font = (FontStyle)rtxtbContent.Font.Style;
+            fontStyle = new Font(rtxtbContent.Font.FontFamily, (float)nupFontSize.Value, font);
+
+            panlTools.Visible = false;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,7 +55,8 @@ namespace Notepad_WinFormsApp
                 {
                     saveFile();
                     rtxtbContent.Clear();
-                } else if (confirmInt == 1)
+                }
+                else if (confirmInt == 1)
                 {
                     this.Text = "Unnamed" + app_name;
                     rtxtbContent.Clear();
@@ -89,7 +104,8 @@ namespace Notepad_WinFormsApp
             if (confirmOpen == DialogResult.Yes)
             {
                 return 0;
-            } else if (confirmOpen == DialogResult.No)
+            }
+            else if (confirmOpen == DialogResult.No)
             {
                 return 1;
             }
@@ -102,7 +118,8 @@ namespace Notepad_WinFormsApp
             if (textBox.Text.Length > 0)
             {
                 return false;
-            } else
+            }
+            else
             {
                 return true;
             }
@@ -164,13 +181,13 @@ namespace Notepad_WinFormsApp
                 {
                     saveFile();
                     Close();
-                } 
+                }
                 // Else if == 1, exit
                 else if (confirmResult == 1)
                 {
                     Close();
                 }
-            } 
+            }
             // If it's empty, close
             else
             {
@@ -295,12 +312,11 @@ namespace Notepad_WinFormsApp
 
         private void rtxtbContent_SelectionChanged(object sender, EventArgs e)
         {
-            
         }
 
-    /// 
-    ///
-    /// 
+        /// 
+        ///
+        /// 
 
         // Returns the word count of the richTextBox
         private int GetWordCount(RichTextBox rtb)
@@ -352,26 +368,37 @@ namespace Notepad_WinFormsApp
 
         private void fullscreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.TopMost = true;
-            // Shows the close button on the tool bar
-            btnClose.Visible = true;
+            toggleFullscreen(true);
         }
 
         private void windowedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.WindowState = FormWindowState.Normal;
-            this.CenterToScreen();
-            // Hides the close button on the tool bar
-            btnClose.Visible = false;
+            toggleFullscreen(false);
+        }
+
+        private void toggleFullscreen(bool fullscreen)
+        {
+            if (fullscreen)
+            {
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+                this.TopMost = true;
+                // Shows the close button on the tool bar
+                btnClose.Visible = true;
+            } else
+            {
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+                this.CenterToScreen();
+                // Hides the close button on the tool bar
+                btnClose.Visible = false;
+            }
         }
 
         private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // current zoom - 10 percent
-            rtxtbContent.ZoomFactor -= (float) 0.1;
+            rtxtbContent.ZoomFactor -= (float)0.1;
             updateZoomFactorLabel();
         }
 
@@ -382,9 +409,49 @@ namespace Notepad_WinFormsApp
             updateZoomFactorLabel();
         }
 
-        private void NotesForm_Load(object sender, EventArgs e)
+        private void nupFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            Font fontStyle = new Font(rtxtbContent.Font.FontFamily, (float)nupFontSize.Value, font);
+            // Changes the font size of the whole rtxtbContent
+            rtxtbContent.Font = fontStyle;
+            // Word/OpenOffice/LibreOffice like font size (changes the font of the selected text/text typed after change)
+            /*rtxtbContent.SelectionFont = fontStyle;*/
+        }
+
+        private void btnFontColor_Click(object sender, EventArgs e)
+        {
+            if (cdialColor.ShowDialog() == DialogResult.OK)
+            {
+                rtxtbContent.ForeColor = cdialColor.Color;
+                btnFontColor.BackColor = cdialColor.Color;
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void nupZoom_ValueChanged(object sender, EventArgs e)
+        {
+            rtxtbContent.ZoomFactor = (float)nupZoom.Value / 100;
+            updateZoomFactorLabel();
+        }
+
+        private void cbFullscreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbFullscreen.Checked)
+            {
+                toggleFullscreen(true);
+            } else
+            {
+                toggleFullscreen(false);
+            }
+        }
+
+        private void toolbarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panlTools.Visible = !panlTools.Visible;
         }
     }
 }

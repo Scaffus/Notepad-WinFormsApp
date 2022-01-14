@@ -60,13 +60,31 @@ namespace Notepad_WinFormsApp
             this.process = new System.Diagnostics.Process();
             this.btnClose = new System.Windows.Forms.Button();
             this.panlInfos = new System.Windows.Forms.Panel();
+            this.lablEncoding = new System.Windows.Forms.Label();
             this.lablZoom = new System.Windows.Forms.Label();
             this.lablWords = new System.Windows.Forms.Label();
             this.lablColumnLigns = new System.Windows.Forms.Label();
             this.panlTabLeft = new System.Windows.Forms.Panel();
             this.panlTabTop = new System.Windows.Forms.Panel();
+            this.nupFontSize = new System.Windows.Forms.NumericUpDown();
+            this.panlTools = new System.Windows.Forms.Panel();
+            this.gbDisplay = new System.Windows.Forms.GroupBox();
+            this.nupZoom = new System.Windows.Forms.NumericUpDown();
+            this.lablDisplayZoom_Tools = new System.Windows.Forms.Label();
+            this.gpFontSize = new System.Windows.Forms.GroupBox();
+            this.btnFontColor = new System.Windows.Forms.Button();
+            this.lablFontColor_Tools = new System.Windows.Forms.Label();
+            this.lablFontSize_Tools = new System.Windows.Forms.Label();
+            this.cbFullscreen = new System.Windows.Forms.CheckBox();
+            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenu.SuspendLayout();
             this.panlInfos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupFontSize)).BeginInit();
+            this.panlTools.SuspendLayout();
+            this.gbDisplay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupZoom)).BeginInit();
+            this.gpFontSize.SuspendLayout();
             this.SuspendLayout();
             // 
             // msMenu
@@ -77,7 +95,8 @@ namespace Notepad_WinFormsApp
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.formatToolStripMenuItem,
-            this.displayToolStripMenuItem});
+            this.displayToolStripMenuItem,
+            this.windowsToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(800, 29);
@@ -324,6 +343,7 @@ namespace Notepad_WinFormsApp
             // panlInfos
             // 
             this.panlInfos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(51)))));
+            this.panlInfos.Controls.Add(this.lablEncoding);
             this.panlInfos.Controls.Add(this.lablZoom);
             this.panlInfos.Controls.Add(this.lablWords);
             this.panlInfos.Controls.Add(this.lablColumnLigns);
@@ -332,6 +352,17 @@ namespace Notepad_WinFormsApp
             this.panlInfos.Name = "panlInfos";
             this.panlInfos.Size = new System.Drawing.Size(800, 24);
             this.panlInfos.TabIndex = 3;
+            // 
+            // lablEncoding
+            // 
+            this.lablEncoding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lablEncoding.AutoSize = true;
+            this.lablEncoding.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablEncoding.Location = new System.Drawing.Point(72, 3);
+            this.lablEncoding.Name = "lablEncoding";
+            this.lablEncoding.Size = new System.Drawing.Size(41, 15);
+            this.lablEncoding.TabIndex = 3;
+            this.lablEncoding.Text = "UTF-8";
             // 
             // lablZoom
             // 
@@ -384,12 +415,191 @@ namespace Notepad_WinFormsApp
             this.panlTabTop.Size = new System.Drawing.Size(795, 5);
             this.panlTabTop.TabIndex = 5;
             // 
+            // nupFontSize
+            // 
+            this.nupFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nupFontSize.AutoSize = true;
+            this.nupFontSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(51)))));
+            this.nupFontSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nupFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nupFontSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.nupFontSize.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nupFontSize.Location = new System.Drawing.Point(78, 17);
+            this.nupFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nupFontSize.Name = "nupFontSize";
+            this.nupFontSize.Size = new System.Drawing.Size(52, 22);
+            this.nupFontSize.TabIndex = 6;
+            this.nupFontSize.Value = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.nupFontSize.ValueChanged += new System.EventHandler(this.nupFontSize_ValueChanged);
+            // 
+            // panlTools
+            // 
+            this.panlTools.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panlTools.AutoSize = true;
+            this.panlTools.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(51)))));
+            this.panlTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panlTools.Controls.Add(this.gbDisplay);
+            this.panlTools.Controls.Add(this.gpFontSize);
+            this.panlTools.Location = new System.Drawing.Point(634, 40);
+            this.panlTools.Name = "panlTools";
+            this.panlTools.Padding = new System.Windows.Forms.Padding(8);
+            this.panlTools.Size = new System.Drawing.Size(154, 312);
+            this.panlTools.TabIndex = 7;
+            // 
+            // gbDisplay
+            // 
+            this.gbDisplay.Controls.Add(this.cbFullscreen);
+            this.gbDisplay.Controls.Add(this.nupZoom);
+            this.gbDisplay.Controls.Add(this.lablDisplayZoom_Tools);
+            this.gbDisplay.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.gbDisplay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.gbDisplay.Location = new System.Drawing.Point(8, 83);
+            this.gbDisplay.Name = "gbDisplay";
+            this.gbDisplay.Size = new System.Drawing.Size(136, 76);
+            this.gbDisplay.TabIndex = 9;
+            this.gbDisplay.TabStop = false;
+            this.gbDisplay.Text = "Display";
+            // 
+            // nupZoom
+            // 
+            this.nupZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nupZoom.AutoSize = true;
+            this.nupZoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(51)))));
+            this.nupZoom.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nupZoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nupZoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.nupZoom.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nupZoom.Location = new System.Drawing.Point(78, 19);
+            this.nupZoom.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.nupZoom.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nupZoom.Name = "nupZoom";
+            this.nupZoom.Size = new System.Drawing.Size(52, 22);
+            this.nupZoom.TabIndex = 12;
+            this.nupZoom.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nupZoom.ValueChanged += new System.EventHandler(this.nupZoom_ValueChanged);
+            // 
+            // lablDisplayZoom_Tools
+            // 
+            this.lablDisplayZoom_Tools.AutoSize = true;
+            this.lablDisplayZoom_Tools.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablDisplayZoom_Tools.Location = new System.Drawing.Point(6, 17);
+            this.lablDisplayZoom_Tools.Name = "lablDisplayZoom_Tools";
+            this.lablDisplayZoom_Tools.Size = new System.Drawing.Size(51, 21);
+            this.lablDisplayZoom_Tools.TabIndex = 12;
+            this.lablDisplayZoom_Tools.Text = "Zoom";
+            // 
+            // gpFontSize
+            // 
+            this.gpFontSize.Controls.Add(this.btnFontColor);
+            this.gpFontSize.Controls.Add(this.lablFontColor_Tools);
+            this.gpFontSize.Controls.Add(this.lablFontSize_Tools);
+            this.gpFontSize.Controls.Add(this.nupFontSize);
+            this.gpFontSize.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gpFontSize.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpFontSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.gpFontSize.Location = new System.Drawing.Point(8, 8);
+            this.gpFontSize.Name = "gpFontSize";
+            this.gpFontSize.Size = new System.Drawing.Size(136, 75);
+            this.gpFontSize.TabIndex = 8;
+            this.gpFontSize.TabStop = false;
+            this.gpFontSize.Text = "Font";
+            // 
+            // btnFontColor
+            // 
+            this.btnFontColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFontColor.Location = new System.Drawing.Point(110, 45);
+            this.btnFontColor.Name = "btnFontColor";
+            this.btnFontColor.Size = new System.Drawing.Size(20, 20);
+            this.btnFontColor.TabIndex = 11;
+            this.btnFontColor.UseVisualStyleBackColor = true;
+            // 
+            // lablFontColor_Tools
+            // 
+            this.lablFontColor_Tools.AutoSize = true;
+            this.lablFontColor_Tools.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablFontColor_Tools.Location = new System.Drawing.Point(6, 44);
+            this.lablFontColor_Tools.Name = "lablFontColor_Tools";
+            this.lablFontColor_Tools.Size = new System.Drawing.Size(48, 21);
+            this.lablFontColor_Tools.TabIndex = 9;
+            this.lablFontColor_Tools.Text = "Color";
+            // 
+            // lablFontSize_Tools
+            // 
+            this.lablFontSize_Tools.AutoSize = true;
+            this.lablFontSize_Tools.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablFontSize_Tools.Location = new System.Drawing.Point(6, 18);
+            this.lablFontSize_Tools.Name = "lablFontSize_Tools";
+            this.lablFontSize_Tools.Size = new System.Drawing.Size(38, 21);
+            this.lablFontSize_Tools.TabIndex = 7;
+            this.lablFontSize_Tools.Text = "Size";
+            // 
+            // cbFullscreen
+            // 
+            this.cbFullscreen.AutoSize = true;
+            this.cbFullscreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbFullscreen.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.cbFullscreen.Location = new System.Drawing.Point(10, 45);
+            this.cbFullscreen.Name = "cbFullscreen";
+            this.cbFullscreen.Size = new System.Drawing.Size(96, 25);
+            this.cbFullscreen.TabIndex = 13;
+            this.cbFullscreen.Text = "Fullscreen";
+            this.cbFullscreen.UseVisualStyleBackColor = true;
+            this.cbFullscreen.CheckedChanged += new System.EventHandler(this.cbFullscreen_CheckedChanged);
+            // 
+            // windowsToolStripMenuItem
+            // 
+            this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolbarToolStripMenuItem});
+            this.windowsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(87, 25);
+            this.windowsToolStripMenuItem.Text = "Windows";
+            // 
+            // toolbarToolStripMenuItem
+            // 
+            this.toolbarToolStripMenuItem.Name = "toolbarToolStripMenuItem";
+            this.toolbarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.T)));
+            this.toolbarToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
+            this.toolbarToolStripMenuItem.Text = "Toolbar";
+            this.toolbarToolStripMenuItem.Click += new System.EventHandler(this.toolbarToolStripMenuItem_Click);
+            // 
             // NotesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panlTools);
             this.Controls.Add(this.rtxtbContent);
             this.Controls.Add(this.panlTabTop);
             this.Controls.Add(this.panlTabLeft);
@@ -402,11 +612,17 @@ namespace Notepad_WinFormsApp
             this.MainMenuStrip = this.msMenu;
             this.Name = "NotesForm";
             this.Text = "Notes";
-            this.Load += new System.EventHandler(this.NotesForm_Load);
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
             this.panlInfos.ResumeLayout(false);
             this.panlInfos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupFontSize)).EndInit();
+            this.panlTools.ResumeLayout(false);
+            this.gbDisplay.ResumeLayout(false);
+            this.gbDisplay.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupZoom)).EndInit();
+            this.gpFontSize.ResumeLayout(false);
+            this.gpFontSize.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,6 +665,19 @@ namespace Notepad_WinFormsApp
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem1;
         private System.Windows.Forms.Panel panlTabLeft;
         private System.Windows.Forms.Panel panlTabTop;
+        private System.Windows.Forms.Label lablEncoding;
+        private System.Windows.Forms.NumericUpDown nupFontSize;
+        private System.Windows.Forms.Panel panlTools;
+        private System.Windows.Forms.Label lablFontSize_Tools;
+        private System.Windows.Forms.GroupBox gpFontSize;
+        private System.Windows.Forms.Label lablFontColor_Tools;
+        private System.Windows.Forms.GroupBox gbDisplay;
+        private System.Windows.Forms.Button btnFontColor;
+        private System.Windows.Forms.NumericUpDown nupZoom;
+        private System.Windows.Forms.Label lablDisplayZoom_Tools;
+        private System.Windows.Forms.CheckBox cbFullscreen;
+        private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolbarToolStripMenuItem;
     }
 }
 
