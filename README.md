@@ -15,3 +15,4 @@ c# WindowsForms .NET Framework
 - App title is file name
 - Close, new and open safety (save popup message)
 - Save indicator in app title
+- Toolbar
