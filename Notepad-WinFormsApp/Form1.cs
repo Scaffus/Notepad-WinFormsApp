@@ -20,6 +20,8 @@ namespace Notepad_WinFormsApp
         Font fontStyle;
         Color defaultColor = Color.FromArgb(204, 204, 204);
 
+        bool fullscreenMode = false;
+
         // Used to know wether or not the user has saved his file
         // so it doesn't show the save dialog everytime the user saves.
         string saveFile_Name;
@@ -368,7 +370,8 @@ namespace Notepad_WinFormsApp
 
         private void fullscreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            toggleFullscreen(true);
+            fullscreenMode = !fullscreenMode;
+            toggleFullscreen(fullscreenMode);
         }
 
         private void windowedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -385,6 +388,8 @@ namespace Notepad_WinFormsApp
                 this.TopMost = true;
                 // Shows the close button on the tool bar
                 btnClose.Visible = true;
+                // Checks the fullscreen checkbox in the toolbar
+                cbFullscreen.Checked = true;
             } else
             {
                 this.FormBorderStyle = FormBorderStyle.Sizable;
@@ -392,6 +397,7 @@ namespace Notepad_WinFormsApp
                 this.CenterToScreen();
                 // Hides the close button on the tool bar
                 btnClose.Visible = false;
+                cbFullscreen.Checked = false;
             }
         }
 
@@ -452,6 +458,15 @@ namespace Notepad_WinFormsApp
         private void toolbarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panlTools.Visible = !panlTools.Visible;
+        }
+
+        private void btnFontFamily_Tools_Click(object sender, EventArgs e)
+        {
+            if (fdialFont.ShowDialog() == DialogResult.OK)
+            {
+                rtxtbContent.Font = fdialFont.Font;
+                btnFontFamily_Tools.Text = fdialFont.Font.Name;
+            }
         }
     }
 }
